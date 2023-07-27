@@ -1,16 +1,15 @@
 import re
-import csv
 import os
 
-
+# Validates ISBN to match convention
 def isbn_validation(isbn):
     return bool(re.match(r"^\d{9}(\d|X)$", isbn))
 
-
+# Validates prices to match expected format, no negative numbers, only 2 numbers after decimal point, currency either euro or czech crowns, with tolerance for spaces before it
 def price_validation(price):
     return bool(re.match(r"^\s*\d+(?:[,.]\d{1,2})?\s*(?:€|Kč)$", price))
 
-
+# Validates line, if missing a field, message is printed in terminal
 def validate_line(line, line_num):
     data = line.strip().split(";")
     if len(data) != 4:
@@ -32,13 +31,13 @@ def validate_line(line, line_num):
     elif not price_validation(price):
         print(f"Error! Line {line_num}: Invalid price format.")
 
-
+# Validates if file exists in the path indicated by the user, closes the program if not
 def validate_csv_file(file_path):
     if not os.path.isfile(file_path):
         print(f"Error! File '{file_path}' not found.")
         return
 
-	
+# Reads file line by line, utf-8 encoding to tolerate non-ascii characters
     with open(file_path, "r", encoding="utf-8") as file:
         for line_num, line in enumerate(file, 1):
             validate_line(line, line_num)
