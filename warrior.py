@@ -5,23 +5,25 @@ class Warrior:
         self.is_alive = True
 
     def __add__(self, other):
-        if self.is_alive and other.is_alive:
+        if self.is_alive and other.is_alive:  # If both warriors are alive
             new_name = f"{self.name} {other.name}"
             new_max_health = self.maximum_health + other.maximum_health
-            return Warrior(name=new_name, maximum_health=new_max_health)
+            return Warrior(
+                name=new_name, maximum_health=new_max_health
+            )  # Create a new warrior
         else:
             return None
 
     def __sub__(self, other):
-        if self.is_alive and other.is_alive:
-            self.maximum_health -= 1
-            other.maximum_health -= 1
+        if self.is_alive and other.is_alive:  # If both warrior are alive
+            self.maximum_health -= 1  # Reduce the maximum health of self
+            other.maximum_health -= 1  # Reduce maximum health of other
 
-            if self.maximum_health <= 0:
-                self.is_alive = False
+            if self.maximum_health <= 0:  # If self maximum health is <= 0
+                self.is_alive = False  # Set self is_alive to False
 
-            if other.maximum_health <= 0:
-                other.is_alive = False
+            if other.maximum_health <= 0:  # If other maximum health is <= 0
+                other.is_alive = False  # Set other is_alive to False
 
     def __str__(self):
         return f'Warrior(name="{self.name}", maximum_health={self.maximum_health}, is_alive={self.is_alive})'

@@ -12,7 +12,7 @@ match_data = soup.find_all("div", class_="list-score-structured-wapper")
 # Define your favorite team
 favorite_team = "Mountfield"
 
-# Iterate over each match data
+
 for data in match_data:
     # Get the date of the match
     date_time_container = data.find("div", class_="datetime-container")
@@ -37,3 +37,12 @@ for data in match_data:
     if favorite_team in score:
         defeated_team = home_team if favorite_team == away_team else away_team
         print(f"{date} - we defeated {defeated_team}")
+
+    """
+    Didn't work.
+    Not sure if the website blocks or if it doesn't work with the scripts present in it
+    to update the match details dynamically.
+    Can either get a complete print of the html code, or nothing if using html parser, lxml
+    or other method to scrape.
+    Good challenge! :D
+    """
